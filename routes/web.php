@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\HomeController;
@@ -19,10 +20,21 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('welcome');
+    return Inertia::render('auth/login');
 })->name('/');
 
 Route::get('home', [HomeController::class, 'index'])->name('home');
+Route::get('animal/index', [AnimalController::class, 'animal_index'])->name('animal.index');
+Route::post('animal/create', [AnimalController::class, 'animal_create'])->name('animal.create');
+Route::get('reproduction/index', [AnimalController::class, 'reproduction_index'])->name('reproduction.index');
+Route::post('reproduction/store', [AnimalController::class, 'reproduction_store'])->name('reproduction.store');
+Route::get('embauche/index', [AnimalController::class, 'embauche_index'])->name('embauche.index');
+Route::post('embauche/store', [AnimalController::class, 'embauche_store'])->name('embauche.store');
+
+
+
+
+
 Route::resource('employee', EmployeeController::class)->only(['index', 'store', 'update', 'destroy']);
 
 require __DIR__.'/auth.php';
